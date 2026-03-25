@@ -3,204 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Program - Code Editor</title>
+  <title>Registration Form</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
-      background: #1e1e2e;
-      color: #cdd6f4;
-      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      background: #11111b;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #89b4fa;
-    }
-
-    h1 {
-      font-size: 24px;
-      color: #89b4fa;
-    }
-
-    .controls {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background: #89b4fa;
-      color: #11111b;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #74c7ec;
+      justify-content: center;
     }
 
     .container {
-      flex: 1;
-      display: flex;
-      overflow: hidden;
+      background: white;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 480px;
     }
 
-    .editor {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      border-right: 1px solid #313244;
-    }
-
-    .tabs {
-      background: #181825;
-      padding: 8px 15px;
-      display: flex;
-      gap: 5px;
-    }
-
-    .tab {
-      padding: 8px 16px;
-      background: #313244;
-      border-radius: 4px 4px 0 0;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: #1e1e2e;
-      border-bottom: 3px solid #89b4fa;
-    }
-
-    textarea {
-      flex: 1;
-      background: #1e1e2e;
-      color: #cdd6f4;
-      border: none;
-      padding: 20px;
-      font-size: 16px;
-      font-family: 'Consolas', monospace;
-      resize: none;
-      outline: none;
-    }
-
-    .output-panel {
-      width: 40%;
-      background: #11111b;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .output-header {
-      background: #181825;
-      padding: 12px 20px;
-      font-weight: bold;
-      border-bottom: 1px solid #313244;
-    }
-
-    #output {
-      flex: 1;
-      padding: 20px;
-      background: #1e1e2e;
-      color: #a6e3a1;
-      font-family: 'Consolas', monospace;
-      overflow-y: auto;
-      white-space: pre-wrap;
-    }
-
-    footer {
-      background: #11111b;
-      padding: 10px;
+    h2 {
       text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5a6fd8;
+    }
+
+    .error {
+      color: #e74c3c;
       font-size: 14px;
-      color: #6e738d;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success {
+      text-align: center;
+      color: #27ae60;
+      margin-top: 15px;
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>💻 My Program</h1>
-    <div class="controls">
-      <button onclick="runCode()">▶ Run</button>
-      <button onclick="clearOutput()">Clear Output</button>
-    </div>
-  </header>
-
   <div class="container">
-    <!-- Code Editor -->
-    <div class="editor">
-      <div class="tabs">
-        <div class="tab active">index.html</div>
-        <div class="tab">script.js</div>
-        <div class="tab">style.css</div>
+    <h2>Create Account</h2>
+    
+    <form id="registrationForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" required>
+        <div class="error" id="nameError">Name must be at least 3 characters</div>
       </div>
-      <textarea id="code" placeholder="Write your HTML, CSS, or JavaScript here...">
-// Welcome to My Program
-console.log("Hello World! 👋");
-document.body.style.background = "#1e1e2e";
-      </textarea>
-    </div>
 
-    <!-- Output Panel -->
-    <div class="output-panel">
-      <div class="output-header">Output Console</div>
-      <div id="output"></div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="example@email.com" required>
+        <div class="error" id="emailError">Please enter a valid email</div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Create password" required>
+          <div class="error" id="passError">Password must be at least 6 characters</div>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+          <div class="error" id="confirmError">Passwords do not match</div>
+        </div>
+      </div>
+
+      <button type="submit">Register Now</button>
+    </form>
+
+    <div class="success" id="successMessage">
+      ✅ Registration Successful!
     </div>
   </div>
 
-  <footer>
-    Simple HTML Program / Mini Code Editor • Made with ❤️
-  </footer>
-
   <script>
-    function runCode() {
-      const code = document.getElementById('code').value;
-      const output = document.getElementById('output');
-      
-      output.innerHTML = ''; // Clear previous output
-      
-      try {
-        // For JavaScript execution (basic)
-        if (code.includes('console.log')) {
-          const oldLog = console.log;
-          console.log = function(message) {
-            output.innerHTML += message + '<br>';
-          };
-          
-          eval(code);
-          
-          console.log = oldLog; // Restore original console
-        } else {
-          output.innerHTML = "Code executed successfully!<br>";
-        }
-      } catch (error) {
-        output.style.color = '#f38ba8';
-        output.innerHTML = `Error: ${error.message}`;
+    const form = document.getElementById('registrationForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Reset errors
+      document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+
+      let isValid = true;
+
+      const fullname = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Name validation
+      if (fullname.length < 3) {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
       }
-    }
 
-    function clearOutput() {
-      document.getElementById('output').innerHTML = '';
-    }
+      // Password validation
+      if (password.length < 6) {
+        document.getElementById('passError').style.display = 'block';
+        isValid = false;
+      }
 
-    // Keyboard shortcut: Ctrl + Enter to run
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'Enter') {
-        runCode();
+      // Confirm password
+      if (password !== confirmPassword) {
+        document.getElementById('confirmError').style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) {
+        document.getElementById('successMessage').style.display = 'block';
+        form.reset();
+
+        // Optional: Redirect after 2 seconds
+        setTimeout(() => {
+          alert("Registration Successful! (In real project, data would be saved here)");
+        }, 1500);
       }
     });
   </script>
